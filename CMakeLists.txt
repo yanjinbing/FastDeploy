@@ -37,7 +37,7 @@ include(${PROJECT_SOURCE_DIR}/cmake/utils.cmake)
 # Set C++11 as standard for the whole project
 if(NOT MSVC)
   if(NOT DEFINED CMAKE_CXX_STANDARD)
-    set(CMAKE_CXX_STANDARD 11)
+    set(CMAKE_CXX_STANDARD 17)
   endif()
   set(CMAKE_CXX_FLAGS "-Wno-format -g0 -O3")
   if(NEED_ABI0)

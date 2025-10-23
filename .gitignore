@@ -67,3 +67,6 @@ llm/client/fastdeploy_client.egg-info/
 llm/client/fastdeploy_client/tests/log/
 *.pyc
 *.log
+build/
+build_ios/
+FastDeploy.framework/
