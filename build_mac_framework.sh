@@ -6,7 +6,7 @@ FASTDEPLOY_ROOT=$(pwd)
 BUILD_DIR=$FASTDEPLOY_ROOT/build_ios
 FRAMEWORK_NAME=FastDeploy
 FRAMEWORK_DIR=$FASTDEPLOY_ROOT/$FRAMEWORK_NAME.framework
-
+OPENCVDIR=/Users/yan/Code/Opencv/opencv/opencv_xcframework_output/macos/build/build-arm64-macosx/install
 # 第三方依赖（如 fast_tokenizer / onnxruntime / paddle2onnx）
 THIRD_INSTALL_DIR=$BUILD_DIR/third_libs/install
 
@@ -20,9 +20,11 @@ cmake .. \
     -DIOS_PLATFORM=OS64 \
     -DCMAKE_BUILD_TYPE=Release \
     -DENABLE_ORT_BACKEND=ON \
+     -DENABLE_VISION=ON \
     -DENABLE_TEXT=ON \
     -DCMAKE_CXX_FLAGS="-fembed-bitcode -O3" \
-    -DCMAKE_CXX_STANDARD=17
+    -DCMAKE_CXX_STANDARD=17 \
+    -DOPENCV_DIRECTORY=$OPENCVDIR 
 
 # ===================== 3️⃣ 编译动态库 =====================
 cmake --build . --target fastdeploy -j8
