@@ -4,7 +4,7 @@ set -e
 # ===================== 配置路径 =====================
 FASTDEPLOY_ROOT=$(pwd)
 BUILD_DIR=$FASTDEPLOY_ROOT/build_ios
-FRAMEWORK_NAME=FastDeploy
+FRAMEWORK_NAME=fastdeploy
 FRAMEWORK_DIR=$FASTDEPLOY_ROOT/$FRAMEWORK_NAME.framework
 OPENCVDIR=/Users/yan/Code/Opencv/opencv/opencv_xcframework_output/macos/build/build-arm64-macosx/install
 THIRD_INSTALL_DIR=$BUILD_DIR/third_libs/install
