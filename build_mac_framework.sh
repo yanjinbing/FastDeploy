@@ -6,7 +6,7 @@ FASTDEPLOY_ROOT=$(pwd)
 BUILD_DIR=$FASTDEPLOY_ROOT/build_ios
 FRAMEWORK_NAME=fastdeploy
 FRAMEWORK_DIR=$FASTDEPLOY_ROOT/$FRAMEWORK_NAME.framework
-OPENCVDIR=/Users/yan/Code/Opencv/opencv/opencv_xcframework_output/macos/build/build-arm64-macosx/install
+OPENCVDIR=/usr/local/opencv-4.10.0-static/lib/cmake/opencv4
 THIRD_INSTALL_DIR=$BUILD_DIR/third_libs/install
 
 # ===================== 1️⃣ 创建构建目录 =====================
@@ -17,14 +17,15 @@ cd "$BUILD_DIR"
 
 # ===================== 2️⃣ 配置 CMake =====================
 cmake .. \
-    -DIOS_PLATFORM=OS64 \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=MinSizeRel \
     -DENABLE_ORT_BACKEND=ON \
     -DENABLE_VISION=ON \
     -DENABLE_TEXT=ON \
     -DCMAKE_CXX_FLAGS="-fembed-bitcode -O3" \
     -DCMAKE_CXX_STANDARD=17 \
-    -DOPENCV_DIRECTORY=$OPENCVDIR 
+    -DOPENCV_DIRECTORY=$OPENCVDIR \
+    -DWITH_OPENCV_STATIC=ON
+
 
 # ===================== 3️⃣ 编译主库 =====================
 cmake --build . --target fastdeploy -j8
@@ -45,7 +46,7 @@ cp "$FD_DYLIB" "$FRAMEWORK_DIR/$FRAMEWORK_NAME"
 
 # 修改 dylib install_name 和 rpath
 install_name_tool -id @rpath/$FRAMEWORK_NAME.framework/$FRAMEWORK_NAME "$FRAMEWORK_DIR/$FRAMEWORK_NAME"
-install_name_tool -add_rpath @loader_path/../Libraries "$FRAMEWORK_DIR/$FRAMEWORK_NAME"
+install_name_tool -add_rpath @loader_path/Libraries "$FRAMEWORK_DIR/$FRAMEWORK_NAME"
 
 # ===================== 6️⃣ 拷贝第三方 dylib 并修改依赖 =====================
 echo "📦 处理第三方依赖 dylib..."
