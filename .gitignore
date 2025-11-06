@@ -68,5 +68,9 @@ llm/client/fastdeploy_client/tests/log/
 *.pyc
 *.log
 build/
+install/
 build_ios/
+build_ios_simulator_static/
+build_ios_device_static/
+build_macos_static/
 FastDeploy.framework/

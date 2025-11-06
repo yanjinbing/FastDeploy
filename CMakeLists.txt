@@ -81,6 +81,7 @@ option(WITH_KUNLUNXIN "Whether to compile for KunlunXin XPU deploy." OFF)
 option(WITH_TESTING "Whether to compile with unittest." OFF)
 option(WITH_CAPI "Whether to compile with c api." OFF)
 option(WITH_CSHARPAPI "Whether to compile with c# api" OFF)
+option(WITH_STATIC_LIB "Whether to build FastDeploy as static library" OFF)
 
 option(BUILD_EXAMPLES "Whether to build fastdeploy with vision examples" OFF)
 option(BUILD_PADDLE2ONNX "Whether to build paddle2onnx from sources" OFF)
@@ -224,7 +225,7 @@ if(WITH_SW)
 endif()
 
 if(ENABLE_ORT_BACKEND)
-  set(ENABLE_PADDLE2ONNX ON)
+  set(ENABLE_PADDLE2ONNX OFF)
   add_definitions(-DENABLE_ORT_BACKEND)
   list(APPEND ALL_DEPLOY_SRCS ${DEPLOY_ORT_SRCS})
   include(${PROJECT_SOURCE_DIR}/cmake/onnxruntime.cmake)
@@ -501,7 +502,12 @@ configure_file(${PROJECT_SOURCE_DIR}/python/scripts/process_libraries.py.in ${PR
 
 list(REMOVE_ITEM ALL_DEPLOY_SRCS ${DEPLOY_PYBIND_SRCS})
 
-add_library(${LIBRARY_NAME} SHARED ${ALL_DEPLOY_SRCS})
+# 根据选项决定编译为静态库还是动态库
+if(WITH_STATIC_LIB)
+  add_library(${LIBRARY_NAME} STATIC ${ALL_DEPLOY_SRCS})
+else()
+  add_library(${LIBRARY_NAME} SHARED ${ALL_DEPLOY_SRCS})
+endif()
 
 redefine_file_macro(${LIBRARY_NAME})
 

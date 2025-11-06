@@ -17,7 +17,7 @@ endif()
 
 if(ANDROID OR IOS)
   if(ENABLE_ORT_BACKEND)
-    message(FATAL_ERROR "Not support ONNXRuntime backend for Andorid/IOS now. Please set ENABLE_ORT_BACKEND=OFF.")
+   # message(FATAL_ERROR "Not support ONNXRuntime backend for Andorid/IOS now. Please set ENABLE_ORT_BACKEND=OFF.")
   endif()
   if(ENABLE_PADDLE_BACKEND)
     message(FATAL_ERROR "Not support Paddle backend for Andorid/IOS now. Please set ENABLE_PADDLE_BACKEND=OFF.")
