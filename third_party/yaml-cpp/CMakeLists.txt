@@ -1,6 +1,12 @@
 # 3.5 is actually available almost everywhere, but this a good minimum
 cmake_minimum_required(VERSION 3.5)
 
+# 设置 C++ 标准为17
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)   # 强制使用 C++17，不允许降级
+set(CMAKE_CXX_EXTENSIONS OFF)         # 不使用编译器扩展，纯标准模式
+
+
 # enable MSVC_RUNTIME_LIBRARY target property
 # see https://cmake.org/cmake/help/latest/policy/CMP0091.html
 if(POLICY CMP0091)

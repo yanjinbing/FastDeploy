@@ -1,5 +1,9 @@
 #include "yaml-cpp/exceptions.h"
 #include "yaml-cpp/noexcept.h"
+#include <iostream>
+#ifndef _NOEXCEPT
+#define _NOEXCEPT noexcept
+#endif
 
 namespace YAML {
 
